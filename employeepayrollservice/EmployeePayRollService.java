@@ -5,20 +5,25 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeePayRollService {
+	public enum IOservice{FILE_IO,CONSOLE_IO,DATABASE_IO,REST_IO}
 	private List<employeePayrollData> employeePayRollList;
 	//constructor
 	public EmployeePayRollService(){
 	}
 	//constructor with parameter
-	public EmployeePayRollService(ArrayList<employeePayrollData> employeePayRollList) {
-		this.employeePayRollList=employeePayRollList;
+	public EmployeePayRollService(List<employeePayrollData> list) {
+		this.employeePayRollList=list;
 	}
     public static void main(String[] args) {
 		Scanner consoleUserInput = new Scanner(System.in);
 		ArrayList<employeePayrollData> employeePayRollList = new ArrayList();
 		EmployeePayRollService employeePayRollService =new EmployeePayRollService(employeePayRollList);
 		employeePayRollService.readEmployeePayRollData(consoleUserInput);
-		employeePayRollService.writeEmployeePayRollData();
+		employeePayRollService.writeData(IOservice.CONSOLE_IO);
+	}
+	private void writeData(IOservice consoleIo) {
+		// TODO Auto-generated method stub
+		
 	}
 	//taking input from console
 	public void readEmployeePayRollData(Scanner consoleUserInput) {
@@ -31,8 +36,23 @@ public class EmployeePayRollService {
 		employeePayRollList.add(new employeePayrollData(user_id,name,salary));
 	}
 	//printing output on console
-	public void writeEmployeePayRollData() {
-		System.out.println("Employee Pay Roll List:"+employeePayRollList);
+	public void writeEmployeePayRollService(IOservice ioservice) {
+		if(ioservice.equals(ioservice.CONSOLE_IO)) {
+			System.out.println("Employee Pay Roll List:"+employeePayRollList);
+		}
+		else if(ioservice.equals(ioservice.FILE_IO)){
+			new EmployeePayRollFileIOService().writeData(employeePayRollList);
+		}
+		
+	}
+	public void printData(IOservice ioService) {
+		new  EmployeePayRollFileIOService().printData();
+	}
+
+	public long countEntries(IOservice ioService) {
+		if(ioService.equals(IOservice.FILE_IO)) 
+			return new EmployeePayRollFileIOService().countEntries();
+		return 0;
 	}
 
 }
