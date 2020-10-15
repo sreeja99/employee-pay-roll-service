@@ -3,6 +3,7 @@ package com.capgemini.employeepayrollservice;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,8 @@ class EmployeePayRollServiceTest {
 		employeePayRollService=new EmployeePayRollService(Arrays.asList(arrayOfEmps));
 		employeePayRollService. writeEmployeePayRollService(IOservice.FILE_IO);
 		employeePayRollService.printData(IOservice.FILE_IO);
+		List<employeePayrollData> employeeList = employeePayRollService.readData(IOservice.FILE_IO);
+		System.out.println(employeeList);
 		long entries=employeePayRollService.countEntries(IOservice.FILE_IO);
 		Assert.assertEquals(3, entries);
 	}
