@@ -26,5 +26,11 @@ class EmployeePayRollServiceTest {
 		long entries=employeePayRollService.countEntries(IOservice.FILE_IO);
 		Assert.assertEquals(3, entries);
 	}
+	@Test
+	public void givenFileOnReadingShouldReturnCount() {
+		EmployeePayRollService employeePayRollService=new EmployeePayRollService();
+		long entries=employeePayRollService.countEntries(IOservice.FILE_IO);
+		Assert.assertEquals(3, entries);
+	}
 
 }
